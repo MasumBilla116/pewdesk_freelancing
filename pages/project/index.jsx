@@ -1,12 +1,10 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { http_get_request } from "../../helpers/http_requests";
-import ViewBooking from "./viewBookingModal";
 import CustDataTable from "../../components/Tables/CustDataTable";
+import { http_get_request } from "../../helpers/http_requests";
 
 /** Cancel Bookign Modal Start */
 
@@ -225,31 +223,41 @@ const Booking = () => {
     setMonth_year(url_month_year);
   }, [router.query]);
 
-  const columns = [
+  const columns = [ 
+    {
+      name: "S.I",
+      selector: 1,
+      sortable: true,
+    },
     {
       name: "Title",
       selector: (row) => row.title,
       sortable: true,
     },
     {
-      name: "Year",
-      selector: (row) => row.year,
+      name: "Start Date",
+      selector: (row) => row.title,
       sortable: true,
     },
+    {
+      name: "End Date",
+      selector: (row) => row.title,
+      sortable: true,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.title,
+      sortable: true,
+    },
+    
+    {
+      name: "Cost",
+      selector: (row) => row.title,
+      sortable: true,
+    }
   ];
 
-  const data = [
-    {
-      id: 1,
-      title: "Beetlejuice",
-      year: "1988",
-    },
-    {
-      id: 2,
-      title: "Ghostbusters",
-      year: "1984",
-    },
-  ];
+  
 
   return (
     <div className="p-4 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -319,17 +327,7 @@ const Booking = () => {
 
       <div className="max-w-full overflow-x-auto mb-2 mt-2">
         <div style={{ borderTop: "1px solid rgba(189, 189, 189, 0.5)" }}></div>
-        {bookingList?.length !== 0 ? (
-          <>
-            <div className="flex items-center justify-center h-full mt-3">
-              <h3 className="text-2xl mt-2 font-semibold text-black dark:text-white mb-0 capitalize text-opacity-50">
-                No project available this month!
-              </h3>
-            </div>
-          </>
-        ) : (
-          <CustDataTable columns={columns} data={data} />
-        )}
+        <CustDataTable columns={columns} data={[]} />
       </div>
     </div>
   );
