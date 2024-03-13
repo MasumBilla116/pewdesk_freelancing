@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import CustDataTable from "../../components/Tables/CustDataTable";
-import { http_get_request } from "../../helpers/http_requests";
-import { CiMenuKebab } from "react-icons/ci";
-import { BsCashStack } from "react-icons/bs";
+import CustDataTable from "../../../components/Tables/CustDataTable";
+import { http_get_request } from "../../../helpers/http_requests";
+import DataTableActions from "../../../components/Tables/DataTableActions";
 
 /** Cancel Bookign Modal Start */
 
@@ -19,16 +18,16 @@ const CancelBkingModal = ({ isOpen, onClose }) => {
             <div className="fixed inset-0 bg-black opacity-25"></div>
             <div className="relative bg-white p-8 rounded-lg  dark:border-strokedark dark:bg-boxdark w-full max-w-md max-h-full">
               {/* Modal content */}
-              <div className="relative p-4 text-center bg-white ">
+              <div class="relative p-4 text-center bg-white ">
                 <button
                   onClick={onClose}
                   type="button"
-                  className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                   data-modal-toggle="deleteModal"
                 >
                   <svg
                     aria-hidden="true"
-                    className="w-5 h-5"
+                    class="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -39,10 +38,10 @@ const CancelBkingModal = ({ isOpen, onClose }) => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span className="sr-only">Close modal</span>
+                  <span class="sr-only">Close modal</span>
                 </button>
                 <svg
-                  className="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
+                  class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -54,20 +53,20 @@ const CancelBkingModal = ({ isOpen, onClose }) => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <p className="mb-4 text-gray-500 dark:text-gray-300">
+                <p class="mb-4 text-gray-500 dark:text-gray-300">
                   Are you sure you want to cancel this booking?
                 </p>
-                <div className="flex justify-center items-center space-x-4">
+                <div class="flex justify-center items-center space-x-4">
                   <button
                     data-modal-toggle="deleteModal"
                     type="button"
-                    className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   >
                     No, cancel
                   </button>
                   <button
                     type="submit"
-                    className="py-2 px-3 text-sm font-medium text-center text-white bg-danger rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+                    class="py-2 px-3 text-sm font-medium text-center text-white bg-danger rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
                   >
                     Yes, Im sure
                   </button>
@@ -225,89 +224,143 @@ const Booking = () => {
     setMonth_year(url_month_year);
   }, [router.query]);
 
+  const columns = [
+    {
+      name: "S.I",
+      selector: (row) => row.si,
+      sortable: true,
+    },
+    {
+      name: "Title",
+      selector: (row) => row.title,
+      sortable: true,
+    },
+    {
+      name: "Start Date",
+      selector: (row) => row.start_date,
+      sortable: true,
+    },
+    {
+      name: "End Date",
+      selector: (row) => row.end_date,
+      sortable: true,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.status,
+      sortable: true,
+    },
+
+    {
+      name: "Cost",
+      selector: (row) => row.cost,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      selector: (row) => (
+        <DataTableActions
+          viewIcon={true}
+          deleteIcon={true}
+          editIcon={true}
+          deleteEndPoint={"/"}
+          editEndPoint={"/"}
+          viewEndPoint={"/"}
+          id="1"
+        />
+      ),
+      sortable: true,
+    },
+  ];
+
+  const data = [
+    {
+      si: 1,
+      title: "Nextjs Project",
+      start_date: "02-03-25",
+      end_date: "02-03-25",
+      status: "Pending",
+      cost: 5000,
+    },
+    {
+      si: 2,
+      title: "Nextjs Project",
+      start_date: "02-03-25",
+      end_date: "02-03-25",
+      status: "Pending",
+      cost: 5000,
+    },
+  ];
+
   return (
     <div className="p-4 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-2xl mt-2 font-semibold text-black dark:text-white mb-0 uppercase text-opacity-75">
-            Project
+            Project Reports
           </h4>
           <p className="font-semibold text-black dark:text-white mb-0 uppercase text-opacity-50">
-            All of your running project
+            All of your project
           </p>
+        </div>
+
+        <div className="flex items-center">
+          <div className="mr-3">
+            <label className="mb-2 block text-black dark:text-white">
+              Filter By Status
+            </label>
+            <div className="relative">
+              <select
+                name="status"
+                id="status"
+                onChange={changeStatus}
+                value={bookingStatus}
+                className="w-full h-12 rounded border border-stroke bg-gray py-3 px-7 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              >
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="cancelled">Canceled</option>
+              </select>
+            </div>
+          </div>
+          <div className="ml-2">
+            <label className="mb-2 block text-black dark:text-white">
+              Filter By Date
+            </label>
+            <div className="relative">
+              <svg
+                class="hidden fill-current sm:block absolute z-1 top-[46%] right-2"
+                width="9"
+                height="7"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"
+                  fill=""
+                ></path>
+              </svg>
+
+              <DatePicker
+                // showIcon
+                selected={selectedDate}
+                onChange={handleDateChange}
+                dateFormat="MM/yyyy"
+                showMonthYearPicker
+                className="h-12 filter-calender custom-input-date custom-input-date-1 rounded border border-stroke bg-gray py-3 px-2 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                calendarClassName="absolute top-full mt-2 left-0 z-10"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="max-w-full overflow-x-auto mb-2 mt-2">
         <div style={{ borderTop: "1px solid rgba(189, 189, 189, 0.5)" }}></div>
-        {/* start card */}
-
-        <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1  gap-4">
-          <div className="w-full   relative mt-4 p-4 border  dark:border-4 border-[#eee] hover:border-success rounded-lg shadow sm:p-6 bg-white  dark:bg-boxdark dark:border-strokedark">
-            <div className="absolute top-2.5 right-2.5 flex items-center">
-              <span className="rounded bg-[#f4c4044a] text-black text-opacity-75 dark:text-white dark:bg-warning dark:bg-opacity-50 text-sm bg-stroke px-2 font-semibold me-2">
-                Processing
-              </span>
-              <span className="rounded text-black text-opacity-75 dark:text-white dark:bg-warning dark:bg-opacity-50 text-sm bg-stroke px-2 font-semibold me-2 ">
-                Live
-              </span>
-              <span className=" text-black text-opacity-75 dark:text-white   text-sm    font-semibold">
-                <CiMenuKebab />
-              </span>
-            </div>
-            <div className="flex justify-start items-center">
-              <img
-                className="rounded-circle w-12 h-12 me-4"
-                src="https://avatar.iran.liara.run/public"
-                alt=""
-              />
-              <div>
-                <h5 className="text-md font-semibold text-black dark:text-white mb-0 uppercase text-opacity-75">
-                  Connect wallet
-                  <br />
-                </h5>
-                <span className="text-black text-opacity-75 text-sm bg-stroke dark:text-stroke dark:text-opacity-50 dark:bg-transparent px-2 font-semibold">
-                  1 day ago
-                </span>
-              </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Budget $5000
-              </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Task 15
-              </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Complete 5
-              </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Bug 0
-              </div>
-            </div>
-
-            <div className="w-full bg-[#f4c4044a] rounded-full dark:bg-[#f4c4044a] mt-4">
-              <div
-                className="bg-success text-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                style={{ width: "85%" }}
-              >
-                85% complete
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* end card */}
+        <CustDataTable columns={columns} data={data} />
       </div>
     </div>
   );

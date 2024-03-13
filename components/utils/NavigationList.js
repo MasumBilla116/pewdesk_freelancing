@@ -82,7 +82,7 @@ export const NavigationList = [
         />
       </svg>
     ),
-    link: "/project-reports",
+    link: "/project/reports",
   },
   {
     title: "settings",
