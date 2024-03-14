@@ -6,12 +6,17 @@ import Axios from "../../utils/axios";
 import { http_get_request } from "../../helpers/http_requests";
 import { NavigationList } from "../utils/NavigationList";
 import { BrandLogo } from "../utils/Brand";
+import { useRouter } from "next/router";
+import { FaCode } from "react-icons/fa6";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { http, saveToken, token, user } = Axios();
   const uid = user?.id;
 
   const pathname = usePathname();
+  const router = useRouter();
+  console.log("router: ", router.pathname);
+  console.log("pathname: ", pathname);
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -138,7 +143,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <Link
                     href={`${list.link}`}
                     className={`group relative capitalize flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-white dark:text-white duration-300 ease-in-out hover:bg-white/20 dark:hover:bg-meta-4 ${
-                      pathname.includes(`${list.link}`) &&
+                      pathname.includes(list.link) &&
                       "bg-white/20 dark:bg-meta-4"
                     }`}
                   >

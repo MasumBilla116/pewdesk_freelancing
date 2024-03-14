@@ -7,6 +7,11 @@ import CustDataTable from "../../components/Tables/CustDataTable";
 import { http_get_request } from "../../helpers/http_requests";
 import { CiMenuKebab } from "react-icons/ci";
 import { BsCashStack } from "react-icons/bs";
+import { MdOutlinePaid } from "react-icons/md";
+import { MdAddTask } from "react-icons/md";
+import { MdTaskAlt } from "react-icons/md";
+import { PiBugBeetleDuotone } from "react-icons/pi";
+import { MdChecklist } from "react-icons/md";
 
 /** Cancel Bookign Modal Start */
 
@@ -251,9 +256,54 @@ const Booking = () => {
               <span className="rounded text-black text-opacity-75 dark:text-white dark:bg-warning dark:bg-opacity-50 text-sm bg-stroke px-2 font-semibold me-2 ">
                 Live
               </span>
-              <span className=" text-black text-opacity-75 dark:text-white   text-sm    font-semibold">
-                <CiMenuKebab />
-              </span>
+              {/* dropdown menu */}
+              <div class="relative inline-block">
+                <span
+                  class="text-black text-opacity-75 dark:text-white text-sm font-semibold"
+                  id="menu-button"
+                >
+                  <CiMenuKebab />
+                </span>
+                <div
+                  class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                  tabindex="-1"
+                >
+                  <div class="py-1" role="none">
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-0"
+                    >
+                      Item 1
+                    </a>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-1"
+                    >
+                      Item 2
+                    </a>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-2"
+                    >
+                      Item 3
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* end dropdown menu */}
             </div>
             <div className="flex justify-start items-center">
               <img
@@ -266,33 +316,47 @@ const Booking = () => {
                   Connect wallet
                   <br />
                 </h5>
-                <span className="text-black text-opacity-75 text-sm bg-stroke dark:text-stroke dark:text-opacity-50 dark:bg-transparent px-2 font-semibold">
+                <span className="text-black text-opacity-75 text-sm bg-stroke dark:text-stroke dark:text-opacity-50 dark:bg-black px-2 font-semibold">
                   1 day ago
                 </span>
               </div>
             </div>
 
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Budget $5000
+            <div className="grid  grid-cols-2 gap-4 mt-4">
+              {/* start budget */}
+              <div className="w-full bg-stroke dark:bg-black rounded px-4 ">
+                <div className="flex items-center">
+                  <BsCashStack className="me-2" /> Budget $5000
+                </div>
               </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Task 15
+              <div className="w-full bg-stroke dark:bg-black rounded   px-4 ">
+                <div className="flex items-center">
+                  <MdOutlinePaid className="me-2" /> Paid $5000
+                </div>
               </div>
-            </div>
-
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Complete 5
+              {/* task */}
+              <div className="w-full bg-stroke dark:bg-black rounded   px-4 ">
+                <div className="flex items-center">
+                  <MdAddTask className="me-2" /> Task 15
+                </div>
               </div>
-            </div>
 
-            <div className="w-full bg-stroke rounded mt-2 mb-2 px-4 ">
-              <div className="flex items-center">
-                <BsCashStack className="me-2" /> Bug 0
+              <div className="w-full bg-stroke dark:bg-black rounded   px-4 ">
+                <div className="flex items-center">
+                  <MdTaskAlt className="me-2" /> Complete 5
+                </div>
+              </div>
+
+              {/* start bug */}
+              <div className="w-full bg-stroke dark:bg-black rounded   px-4 ">
+                <div className="flex items-center">
+                  <PiBugBeetleDuotone className="me-2" /> Bug 0
+                </div>
+              </div>
+              <div className="w-full bg-stroke dark:bg-black rounded   px-4 ">
+                <div className="flex items-center">
+                  <MdChecklist className="me-2" /> Fix 0
+                </div>
               </div>
             </div>
 
