@@ -1,8 +1,20 @@
+import { useEffect, useRef } from "react";
+import Client from "../../components/chat/Client";
 import MessageInput from "../../components/chat/MessageInput";
 import ReceiverText from "../../components/chat/ReceiverText";
 import SenderText from "../../components/chat/SenderText";
 
-const Chat = () => {
+const ChatList = () => {
+  const scrollableContainerRef = useRef(null);
+  const scrollToBottom = () => {
+    if (scrollableContainerRef.current) {
+      const { current: scrollableContainer } = scrollableContainerRef;
+      scrollableContainer.scrollTop = scrollableContainer.scrollHeight;
+    }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
   return (
     <div className="flex">
       <div className="w-[35%] dark:bg-[#0000006e] bg-[#f4c4044a] border-r border-[#00b6fd70] ">
@@ -59,73 +71,28 @@ const Chat = () => {
         </form>
         <hr className="mt-4 mb-4 border-[#80808040] border-2" />
         <div className="grid-col-1 h-[394px] overflow-y-auto ">
-          <button
-            type="button"
-            className="w-full p-2 hover:bg-[beige] dark:hover:bg-[#013e40] border-b border-[#80808040]"
-          >
-            <div className="flex">
-              <div className="h-12 w-12 flex-none rounded-full relative">
-                <div className="absolute bottom-1 right-0 w-3 h-3 border-2 border-[#f4c4044a] dark:border-black rounded-full bg-success "></div>
-                <img
-                  className="h-12 w-12 rounded-full"
-                  src="https://avatar.iran.liara.run/public"
-                  alt="Jese image"
-                />
-              </div>
-              <div className="grow">
-                <div className="text-bold dark:text-white text-start ps-4">
-                  Masum Billa{" "}
-                  <span className="text-[11px] text-bodydark2"> </span>
-                </div>
-                <div className="text-[12px] dark:text-strock text-start ps-4">
-                  IT Company of USA
-                </div>
-              </div>
-              <div className="flex-none h-12 w-12">
-                <div className="flex justify-center items-center h-12 w-12">
-                  <div className="bg-danger text-white  w-6 h-6 rounded-full">
-                    2
-                  </div>
-                </div>
-              </div>
-            </div>
-          </button>
-          <button
-            type="button"
-            className="w-full p-2 hover:bg-[beige] dark:hover:bg-[#013e40] border-b border-[#80808040]"
-          >
-            <div className="flex">
-              <div className="h-12 w-12 flex-none rounded-full relative">
-                <div className="absolute bottom-1 right-0 w-3 h-3 border-2 border-[#f4c4044a] dark:border-black rounded-full bg-gray "></div>
-                <img
-                  className="h-12 w-12 rounded-full"
-                  src="https://avatar.iran.liara.run/public"
-                  alt="Jese image"
-                />
-              </div>
-              <div className="grow">
-                <div className="text-bold dark:text-white text-start ps-4">
-                  Masum Billa{" "}
-                  <span className="text-[11px] text-bodydark2">5m ago</span>
-                </div>
-                <div className="text-[12px] dark:text-strock text-start ps-4">
-                  IT Company of USA
-                </div>
-              </div>
-              <div className="flex-none h-12 w-12">
-                <div className="flex justify-center items-center h-12 w-12">
-                  <div className="dark:bg-white/20 bg-warning text-white w-6 h-6 rounded-full">
-                    5
-                  </div>
-                </div>
-              </div>
-            </div>
-          </button>
+          <Client
+            name="Masum Billa"
+            company={"IT Company Of USA"}
+            imgSrc={"https://avatar.iran.liara.run/public"}
+            active={false}
+            activeIn={"5m ago"}
+          />
+          <Client
+            name="Masum Billa"
+            company={"IT Company Of USA"}
+            imgSrc={"https://avatar.iran.liara.run/public"}
+            active={true}
+            activeIn={""}
+          />
         </div>
       </div>
       <div className="w-full">
         <div className="flex  flex-col ">
-          <div className="flex-grow h-[400px] overflow-y-auto bg-gray dark:bg-white/20 px-8">
+          <div
+            ref={scrollableContainerRef}
+            className="flex-grow h-[400px] overflow-y-auto bg-gray dark:bg-white/20 px-8"
+          >
             <SenderText />
             <ReceiverText />
             <SenderText />
@@ -144,4 +111,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatList;

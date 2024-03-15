@@ -1,5 +1,28 @@
+import { useRef, useState } from "react";
 import ChannelFileUpload from "../../components/uploads/channel_File_Upload";
+import { AiOutlineDelete } from "react-icons/ai";
+import { IoIosAddCircleOutline } from "react-icons/io";
 const CreateProject = () => {
+  const [taskCount, setTaskCount] = useState(1);
+  const taskContainerRef = useRef(null);
+  const [taskRows, setTaskRows] = useState([
+    {
+      id: 1,
+    },
+  ]);
+  const addTaskRow = () => {
+    const rowCount = taskCount + 1;
+    setTaskCount(rowCount);
+    const row = {
+      id: rowCount,
+    };
+    setTaskRows([...taskRows, row]);
+  };
+  const handleDeleteTaskRow = (index) => {
+    const updateRow = taskRows.filter((_, row) => row !== index);
+    setTaskRows(updateRow);
+  };
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark mt-4">
       <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
@@ -161,7 +184,58 @@ const CreateProject = () => {
             </div>
           </div>
 
-          <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row"></div>
+          {/* project task */}
+          <div className="mb-5.5  ">
+            <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark mt-2">
+              <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
+                <h3 className="font-medium text-black dark:text-white uppercase">
+                  Project Task
+                </h3>
+              </div>
+              <div className="p-7" ref={taskContainerRef}>
+                {taskRows.map((task, index) => (
+                  <div
+                    key={task.id}
+                    className="mb-5.5 flex flex-col gap-5.5 sm:flex-row"
+                  >
+                    <div className="flex w-full">
+                      <div className="relative w-full">
+                        <span className="absolute h-full w-10 bg-danger dark:bg-[#f4c4044a] flex justify-center items-center text-white text-base">
+                          {index + 1}
+                        </span>
+                        <input
+                          className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                          type="text"
+                          name={`task[]`}
+                          placeholder="Write your project task"
+                        />
+                      </div>
+                      <div className="flex justify-start items-center">
+                        <button
+                          type="button"
+                          className="ms-4 me-4 w-8 h-8 text-danger border border-danger flex justify-center items-center px-1 rounded text-2xl"
+                          onClick={() => {
+                            if (taskRows.length > 1) handleDeleteTaskRow(index);
+                          }}
+                        >
+                          <AiOutlineDelete />
+                        </button>
+                        {taskRows.length === index + 1 && (
+                          <button
+                            type="button"
+                            className="w-8 h-8 text-success border border-success flex justify-center items-center px-1 rounded text-2xl"
+                            onClick={addTaskRow}
+                          >
+                            <IoIosAddCircleOutline />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <div className="flex justify-end gap-4.5">
             <button

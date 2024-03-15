@@ -4,6 +4,7 @@ import { FaCode } from "react-icons/fa6";
 import { FaLaptopCode } from "react-icons/fa";
 import { FaRegFileCode } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
+import { FaTasks } from "react-icons/fa";
 export const NavigationList = [
   {
     title: "dashboard",
@@ -19,6 +20,11 @@ export const NavigationList = [
     title: "project",
     icon: <FaLaptopCode />,
     link: "/project",
+  },
+  {
+    title: "task",
+    icon: <FaTasks />,
+    link: "/project/task",
   },
   {
     title: "New Project",

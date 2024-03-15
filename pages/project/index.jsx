@@ -12,6 +12,11 @@ import { MdAddTask } from "react-icons/md";
 import { MdTaskAlt } from "react-icons/md";
 import { PiBugBeetleDuotone } from "react-icons/pi";
 import { MdChecklist } from "react-icons/md";
+import { SlDislike } from "react-icons/sl";
+import { SlLike } from "react-icons/sl";
+import { BiMessageRoundedDots } from "react-icons/bi";
+import Link from "next/link";
+import { GrEdit } from "react-icons/gr";
 
 /** Cancel Bookign Modal Start */
 
@@ -366,6 +371,38 @@ const Booking = () => {
                 style={{ width: "85%" }}
               >
                 85% complete
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 mt-4">
+              <div className="flex justify-evenly items-center">
+                <Link
+                  href={"/project/create"}
+                  className="text-center px-2 py-2  rounded"
+                >
+                  <GrEdit />
+                </Link>
+                <Link href={"/chat"} className="text-center px-2 py-2  rounded">
+                  <BiMessageRoundedDots />
+                </Link>
+                <button
+                  type="button"
+                  className="text-center px-2 py-2  rounded"
+                >
+                  <div className="flex justify-center items-center">
+                    <SlDislike />
+                    <div className="  ms-2">12</div>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  className="text-center px-2 py-2   rounded"
+                >
+                  <div className="flex justify-center items-center">
+                    <SlLike />
+                    <div className="  ms-2">12</div>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
