@@ -5,8 +5,8 @@ import SenderText from "../../components/chat/SenderText";
 const Chat = () => {
   return (
     <div className="flex">
-      <div className="w-[35%] dark:bg-[#0000006e] border-r border-[#00b6fd70] overflow-y-auto px-4 py-4">
-        <form className="flex items-center max-w-lg mx-auto">
+      <div className="w-[35%] dark:bg-[#0000006e] bg-[#f4c4044a] border-r border-[#00b6fd70] ">
+        <form className="flex items-center max-w-lg mx-auto px-4 pt-4">
           <label for="voice-search" className="sr-only">
             Search
           </label>
@@ -31,7 +31,7 @@ const Chat = () => {
             <input
               type="text"
               id="voice-search"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-[#80808040] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-meta-4 dark:border-[#80808040]   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search ...."
               required
             />
@@ -57,24 +57,71 @@ const Chat = () => {
             </button>
           </div>
         </form>
-        <hr className="mt-4 mb-4" />
-        <button type="button" className="w-full p-2 hover:bg-[#013e40] rounded">
-          <div className="flex">
-            <img
-              className="h-12 w-12 rounded-full"
-              src="https://avatar.iran.liara.run/public"
-              alt="Jese image"
-            />
-            <div>
-              <div className="text-bold dark:text-white text-start ps-4">
-                Masum Billa
+        <hr className="mt-4 mb-4 border-[#80808040] border-2" />
+        <div className="grid-col-1 h-[394px] overflow-y-auto ">
+          <button
+            type="button"
+            className="w-full p-2 hover:bg-[beige] dark:hover:bg-[#013e40] border-b border-[#80808040]"
+          >
+            <div className="flex">
+              <div className="h-12 w-12 flex-none rounded-full relative">
+                <div className="absolute bottom-1 right-0 w-3 h-3 border-2 border-[#f4c4044a] dark:border-black rounded-full bg-success "></div>
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src="https://avatar.iran.liara.run/public"
+                  alt="Jese image"
+                />
               </div>
-              <div className="text-[12px] dark:text-strock text-start ps-4">
-                IT Company of USA
+              <div className="grow">
+                <div className="text-bold dark:text-white text-start ps-4">
+                  Masum Billa{" "}
+                  <span className="text-[11px] text-bodydark2"> </span>
+                </div>
+                <div className="text-[12px] dark:text-strock text-start ps-4">
+                  IT Company of USA
+                </div>
+              </div>
+              <div className="flex-none h-12 w-12">
+                <div className="flex justify-center items-center h-12 w-12">
+                  <div className="bg-danger text-white  w-6 h-6 rounded-full">
+                    2
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </button>
+          </button>
+          <button
+            type="button"
+            className="w-full p-2 hover:bg-[beige] dark:hover:bg-[#013e40] border-b border-[#80808040]"
+          >
+            <div className="flex">
+              <div className="h-12 w-12 flex-none rounded-full relative">
+                <div className="absolute bottom-1 right-0 w-3 h-3 border-2 border-[#f4c4044a] dark:border-black rounded-full bg-gray "></div>
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src="https://avatar.iran.liara.run/public"
+                  alt="Jese image"
+                />
+              </div>
+              <div className="grow">
+                <div className="text-bold dark:text-white text-start ps-4">
+                  Masum Billa{" "}
+                  <span className="text-[11px] text-bodydark2">5m ago</span>
+                </div>
+                <div className="text-[12px] dark:text-strock text-start ps-4">
+                  IT Company of USA
+                </div>
+              </div>
+              <div className="flex-none h-12 w-12">
+                <div className="flex justify-center items-center h-12 w-12">
+                  <div className="dark:bg-white/20 bg-warning text-white w-6 h-6 rounded-full">
+                    5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
       </div>
       <div className="w-full">
         <div className="flex  flex-col ">
